@@ -29,16 +29,24 @@
 //
 // 💭 Para pensar (no se califica):
 //   Si escribes this.enviar(total) en vez de super.enviar(total),
-//   ¿a cuál de las dos versiones de enviar estarías llamando?
-//   ¿Qué crees que pasaría?
+//   ¿a cuál de las dos versiones de enviar estarías llamando? Padre
+//   ¿Qué crees que pasaría? Error porque comision no esta en la Padre.
 // ============================================================
 
 // Esta línea trae tu clase Usuario del ejercicio 04
 const { Usuario } = require("./04-clase-usuario");
 
-class Comercio {
-  // Tu código aquí
+class Comercio extends Usuario {
+  constructor(nombre, saldo, comision) {
+    super(nombre, saldo);
+    this.comision = comision
+  }
+enviar(monto){
+  const valorComision = monto * (this.comision / 100);
+  return super.enviar(monto + valorComision);
 }
-
+}
+const espiga = new Comercio("Panadería La Espiga", 50000, 3);
+console.log(espiga.enviar(20000) );
 // No borres esta línea: es la puerta por donde el test usa tu clase
 module.exports = { Comercio };

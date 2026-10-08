@@ -35,8 +35,18 @@
 // Esta línea trae tu clase Pelicula del ejercicio 02
 const { Pelicula } = require("./02-clase-pelicula");
 
-class PeliculaVIP {
-  // Tu código aquí
+class PeliculaVIP extends Pelicula {
+  constructor(titulo, duracion, incluyeComida) {
+    super(titulo, duracion);
+    this.incluyeComida = incluyeComida;
+  }
+  precioBoleta() {
+    let sillaVIP = this.precioBase + 25000;
+    if (this.incluyeComida == true) {
+      sillaVIP += 18000
+    }
+    return sillaVIP;
+  }
 }
 
 // No borres esta línea: es la puerta por donde el test usa tu clase
